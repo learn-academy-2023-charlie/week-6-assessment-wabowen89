@@ -29,75 +29,96 @@
       // Return an array of sentences with the object values (possible tool: string interpolation)
   // Expected Output: ["Ford Prefect is a hitchhiker.", "Zaphod Beeblebrox is president of the galaxy.", "Arthur Dent is a radio employee."]
 
-  describe ("createSent", () => {
+describe ("createSent", () => {
 
-    const hitchhikersCharacters = [
-      { name: "ford prefect", occupation: "a hitchhiker" },
-      { name: "zaphod beeblebrox", occupation: "president of the galaxy" },
-      { name: "arthur dent", occupation: "a radio employee" }
-    ]
+  const hitchhikersCharacters = [
+    { name: "ford prefect", occupation: "a hitchhiker" },
+    { name: "zaphod beeblebrox", occupation: "president of the galaxy" },
+    { name: "arthur dent", occupation: "a radio employee" }
+  ]
     // Expected output: ["Ford Prefect is a hitchhiker.", "Zaphod Beeblebrox is president of the galaxy.", "Arthur Dent is a radio employee."]
   
-    it("takes in an array of objects and returns an array with a sentence about each person with their name capitalized.", () => {
-      expect(createSent(hitchhikersCharacters)).toEqual(["Ford Prefect is a hitchhiker.", "Zaphod Beeblebrox is president of the galaxy.", "Arthur Dent is a radio employee."])
-    })
+  it("takes in an array of objects and returns an array with a sentence about each person with their name capitalized.", () => {
+    expect(createSent(hitchhikersCharacters)).toEqual(["Ford Prefect is a hitchhiker.", "Zaphod Beeblebrox is president of the galaxy.", "Arthur Dent is a radio employee."])
+  })
   })
   
-  // Good failure due to createSent not defined
-  // FAIL  ./challenges.test.js
+// Good failure due to createSent not defined
+// FAIL  ./challenges.test.js
+// createSent
+//   ✕ takes in an array of objects and returns an array with a sentence about each person with their name capitalized. (1 ms)
+
+// ● createSent › takes in an array of objects and returns an array with a sentence about each person with their name capitalized.
+
+//   ReferenceError: createSent is not defined
+
+// b) Create the function that makes the test pass.
+
+// const createSent = (array) => {
+
+//   // Iterates through the array
+//   array.map(value => {
+
+//     // Assigns current value's name values to tempArr
+//     let tempArr = value.name.split(" ")
+
+//     // Iterates through tempArry
+//     for (let i = 0; i < tempArr.length; i++) {
+
+//       // Changes first letter to a capital
+//       tempArr[i] = tempArr[i].charAt(0).toUpperCase() + tempArr[i].slice(1)
+//     }
+
+//     // Replaces current value's name values with the new uppercased ones in 'tempArr'
+//     value.name = tempArr.join(" ")
+
+//   })
+
+//   // Iterates through the given array again
+//   return array.map(value => {
+
+//     // Returns the requested sentence
+//     return `${value.name} is ${value.occupation}.`
+
+//   })
+// }
+
+// Success 
+// PASS  ./challenges.test.js
   // createSent
-  //   ✕ takes in an array of objects and returns an array with a sentence about each person with their name capitalized. (1 ms)
-  
-  // ● createSent › takes in an array of objects and returns an array with a sentence about each person with their name capitalized.
-  
-  //   ReferenceError: createSent is not defined
-  
-  // b) Create the function that makes the test pass.
-  
-  const createSent = (array) => {
-      
-    // Iterates through the array
-    array.map(value => {
-  
-      // Assigns current value's name values to tempArr
-      let tempArr = value.name.split(" ")
-  
-      // Iterates through tempArry
-      for (let i = 0; i < tempArr.length; i++) {
-  
-        // Changes first letter to a capital
-        tempArr[i] = tempArr[i].charAt(0).toUpperCase() + tempArr[i].slice(1)
-      }
-  
-      // Replaces current value's name values with the new uppercased ones in 'tempArr'
-      value.name = tempArr.join(" ")
-        
-    })
-  
-    // Iterates through the given array again
-    return array.map(value => {
-        
-      // Returns the requested sentence
-      return `${value.name} is ${value.occupation}.`
-  
-    })
-  }
-  
-  // Success 
-  // PASS  ./challenges.test.js
-    // createSent
-    // ✓ takes in an array of objects and returns an array with a sentence about each person with their name capitalized. (2 ms)
+  // ✓ takes in an array of objects and returns an array with a sentence about each person with their name capitalized. (2 ms)
   
   
-  // Refactor 1
-  // Pseudo Code:
-    // Process:
-      // 
-    // Expected Output: ["Ford Prefect is a hitchhiker.", "Zaphod Beeblebrox is president of the galaxy.", "Arthur Dent is a radio employee."]
+// Refactor 1
+// Pseudo Code:
+  // Process:
+    // Remove temporary array
+    // Remove nested for loop
+    // Use value.name to access 'name' key values
+    // Append .split() to create new array
+    // Append .map to iterate over newly created array
+      // Return the names with uppercased first letters in a sentence
+  // Expected Output: ["Ford Prefect is a hitchhiker.", "Zaphod Beeblebrox is president of the galaxy.", "Arthur Dent is a radio employee."]
+
+const createSent = (array) => {
+
+  // Iterates through given array
+  return array.map(value => {
+
+    // .name accessess 'name' field of each object in array
+    // .split() creates array of the 'name' field
+    // .map() iterates through that array
+    return value.name.split(" ").map(value => 
+
+      // .charAt & .toUpperCase uppercase the first letter in each word
+      // .slice appends the rest of the word to the uppercased letter
+      // .join returns array to original single string
+      value.charAt(0).toUpperCase() + value.slice(1)).join(" ") + " is " + value.occupation + "."
+  })
+}
+
   
-  
-  
-  // --------------------2) Create a function that takes in a mixed data array and returns an array of only the REMAINDERS of the numbers when divided by 3.
+// --------------------2) Create a function that takes in a mixed data array and returns an array of only the REMAINDERS of the numbers when divided by 3.
   
   // a) Create a test with an expect statement using the variables provided.
   
