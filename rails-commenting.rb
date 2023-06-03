@@ -28,7 +28,7 @@ class BlogPostsController < ApplicationController
 
   def create
     # ---5) This line is designed to retrieve the data from the 'new' method and saves it as a new instance in the database
-          # Running .create() creates a new instance in the database and takes in the parameters pf 'blog_post_params'
+          # Running .create() creates a new instance in the database and takes in the parameter of 'blog_post_params'
     @post = BlogPost.create(blog_post_params)
     if @post.valid?
       redirect_to blog_post_path(@post)
@@ -36,13 +36,13 @@ class BlogPostsController < ApplicationController
   end
 
   def edit
-    # ---6) This is used to provide data from
+    # ---6) This locates the desired post to edit by looking for the ID of the post provided in the parameter
     @post = BlogPost.find(params[:id])
   end
 
   def update
     @post = BlogPost.find(params[:id])
-    # ---7)
+    # ---7) This line sends @post to the blog_post_params method. This will assign @post with a boolean value of true or false
     @post.update(blog_post_params)
     if @post.valid?
       redirect_to blog_post_path(@post)
@@ -52,15 +52,16 @@ class BlogPostsController < ApplicationController
   def destroy
     @post = BlogPost.find(params[:id])
     if @post.destroy
-      # ---8)
+      # ---8) If .destroy is successful, the user is redirected to the main posts page
       redirect_to blog_posts_path
     end
   end
 
-  # ---9)
+  # ---9) private is used to restrict the scope of the arguments below it. The following method can only be accessed within this file and nowhere else. This ensures that the strong params are secure
   private
   def blog_post_params
-    # ---10)
+    # ---10) This line will check to see if blog_post is present through .require. If not, it will through an error
+           # Then, .permit ensures that only the :title and :content parameters are accessed and therefore edited
     params.require(:blog_post).permit(:title, :content)
   end
 end
