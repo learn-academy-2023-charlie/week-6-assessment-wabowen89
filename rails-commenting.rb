@@ -57,7 +57,7 @@ class BlogPostsController < ApplicationController
     end
   end
 
-  # ---9) private is used to restrict the scope of the arguments below it. The following method can only be accessed within this file and nowhere else. This ensures that the strong params are secure
+  # ---9) private is used to restrict the scope of the arguments below it. The following method can only be accessed within this file and nowhere else. This ensures that the strong params are secure.
   private
   def blog_post_params
     # ---10) This line will check to see if blog_post is present through .require. If not, it will through an error
